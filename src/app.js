@@ -79,7 +79,7 @@ App = {
 
     let i = 1;
 
-    while (i <= taskCount.toNumber()) {
+    while (i <= taskCount) {
       // Fetch task data
       const task = await App.todoList.tasks(i);
       const taskId = task[0].toNumber();
@@ -112,6 +112,13 @@ App = {
     App.setLoading(true);
     const content = $('#newTask').val();
     await App.todoList.createTask(content);
+    window.location.reload();
+  },
+
+  toggleCompleted: async (e) => {
+    App.setLoading(true);
+    const taskId = e.target.name;
+    await App.todoList.toggleCompleted(taskId);
     window.location.reload();
   },
 
